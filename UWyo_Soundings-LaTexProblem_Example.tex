@@ -1,0 +1,704 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{UWyo\_Soundings-LaTexProblem\_Example}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{university-of-wyoming-radiosonde-data-and-soundings}{%
+\section{University of Wyoming Radiosonde Data and
+Soundings}\label{university-of-wyoming-radiosonde-data-and-soundings}}
+
+    \hypertarget{justin-richling-4182017}{%
+\subsubsection{Justin Richling
+4/18/2017}\label{justin-richling-4182017}}
+
+    http://weather.uwyo.edu/upperair/sounding.html
+
+    \hypertarget{all-the-station-cities-and-states}{%
+\subsubsection{All the station cities and
+states}\label{all-the-station-cities-and-states}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{StationsList} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wallops Island, VA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Upton, NY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Chatham, MA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Albany, NY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sterling, VA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gray, ME}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Buffalo, NY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pittsburgh, PA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wilmington, OH}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{White Lake, MI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Blacksburg, VA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Greensboro, NC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Newport, NC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Charleston, SC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Jacksonville, FL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tampa Bay, FL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Miami, FL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tallahassee, FL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Shelby Cnty. Airport, AL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Peachtree City, GA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nashville, TN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gaylord, MI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Green Bay, WI}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Davenport, IA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lincoln, IL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Springfield, MO}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Little Rock, AR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Jackson Thomas, MS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Slidell Muni., LA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lake Charles, LA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Shreveport, LA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Norman, OK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dodge City, KS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Topeka, KS}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Omaha, NE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Chanhassen, MN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{International Falls, MN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Aberdeen, SD}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bismarck, ND}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rapid City, SD}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{North Platte, NE}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Amarillo, TX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midland, TX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Del Rio, TX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Corpus Christi, TX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Brownsville, TX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ft. Worth, TX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Santa Teresa, NM}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Albuquerque, NM}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Denver, CO}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Grand Juncion, CO}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Riverton, WY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Glasgow, MT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Great Falls, MT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Salt Lake City, UT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Flagstaff, AZ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tuscon, AZ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Yuma Prarie Grnds, AZ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Las Vegas, NV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Elko, NV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Boise, ID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Spokane, WA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Quillayute, WA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Salem, OR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Medford, OR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reno, NV}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Oakland, CA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Vandenberg Air Force Base, CA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{San Diego, CA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{StationsList2} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wallops Island}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Upton}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Chatham}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Albany}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sterling}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gray}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Buffalo}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pittsburgh}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Wilmington}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{White Lake}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Blacksburg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Greensboro}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Newport}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Charleston}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Jacksonville}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tampa Bay}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Miami}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tallahassee}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Shelby Cnty. Airport}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Peachtree City}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nashville}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gaylord}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Green Bay}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Davenport}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lincoln}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Springfield}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Little Rock}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Jackson Thomas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Slidell Muni.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lake Charles}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Shreveport}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Norman}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dodge City}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Topeka}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Omaha}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Chanhassen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{International Falls}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Aberdeen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Bismarck}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rapid City}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{North Platte}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Amarillo}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midland}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Del Rio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Corpus Christi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Brownsville}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ft. Worth}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Santa Teresa}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Albuquerque}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Denver}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Grand Juncion}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Riverton}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Glasgow}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Great Falls}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Salt Lake City}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Flagstaff}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tuscon}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Yuma Prarie Grnds}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Las Vegas}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Elko}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Boise}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Spokane}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Quillayute}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Salem}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Medford}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Reno}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PYZbs{}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Oakland}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Vandenberg Air Force Base}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{San Diego}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} just making sure the lenth of the list so we can use it later in the}
+        \PY{c+c1}{\PYZsh{} range argument of the for loops}
+        \PY{n+nb}{len}\PY{p}{(}\PY{n}{StationsList}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} 69
+\end{Verbatim}
+        #This is gonna kill the LaTex conversion!! 
+    \hypertarget{all-the-station-code-numbers}{%
+\subsubsection{All the station code
+numbers}\label{all-the-station-code-numbers}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{StationNumList} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{72402}\PY{p}{,}\PY{l+m+mi}{72501}\PY{p}{,}\PY{l+m+mi}{74494}\PY{p}{,}\PY{l+m+mi}{72518}\PY{p}{,}\PY{l+m+mi}{72403}\PY{p}{,}\PY{l+m+mi}{74389}\PY{p}{,}\PY{l+m+mi}{72528}\PY{p}{,}\PY{l+m+mi}{72520}\PY{p}{,}\PY{l+m+mi}{72426}\PY{p}{,}\PY{l+m+mi}{72632}\PY{p}{,}\PY{l+m+mi}{72318}\PY{p}{,}\PY{l+m+mi}{72317}\PY{p}{,}\PY{l+m+mi}{72305}\PY{p}{,}\PY{l+m+mi}{72208}\PY{p}{,}\PY{l+m+mi}{72206}\PY{p}{,}\PY{l+m+mi}{72210}\PY{p}{,}\PYZbs{}
+        \PY{l+m+mi}{72202}\PY{p}{,}\PY{l+m+mi}{72214}\PY{p}{,}\PY{l+m+mi}{72230}\PY{p}{,}\PY{l+m+mi}{72215}\PY{p}{,}\PY{l+m+mi}{72327}\PY{p}{,}\PY{l+m+mi}{72635}\PY{p}{,}\PY{l+m+mi}{72645}\PY{p}{,}\PY{l+m+mi}{74455}\PY{p}{,}\PY{l+m+mi}{74560}\PY{p}{,}\PY{l+m+mi}{72440}\PY{p}{,}\PY{l+m+mi}{72340}\PY{p}{,}\PY{l+m+mi}{72235}\PY{p}{,}\PY{l+m+mi}{72233}\PY{p}{,}\PY{l+m+mi}{72240}\PY{p}{,}\PY{l+m+mi}{72248}\PY{p}{,}\PY{l+m+mi}{72357}\PY{p}{,}\PY{l+m+mi}{72451}\PY{p}{,}\PY{l+m+mi}{72456}\PY{p}{,}\PYZbs{}
+        \PY{l+m+mi}{72558}\PY{p}{,}\PY{l+m+mi}{72649}\PY{p}{,}\PY{l+m+mi}{72747}\PY{p}{,}\PY{l+m+mi}{72659}\PY{p}{,}\PY{l+m+mi}{72764}\PY{p}{,}\PY{l+m+mi}{72662}\PY{p}{,}\PY{l+m+mi}{72562}\PY{p}{,}\PY{l+m+mi}{72363}\PY{p}{,}\PY{l+m+mi}{72265}\PY{p}{,}\PY{l+m+mi}{72261}\PY{p}{,}\PY{l+m+mi}{72251}\PY{p}{,}\PY{l+m+mi}{72250}\PY{p}{,}\PY{l+m+mi}{72249}\PY{p}{,}\PY{l+m+mi}{72364}\PY{p}{,}\PY{l+m+mi}{72365}\PY{p}{,}\PY{l+m+mi}{72469}\PY{p}{,}\PY{l+m+mi}{72476}\PY{p}{,}\PY{l+m+mi}{72672}\PY{p}{,}\PYZbs{}
+        \PY{l+m+mi}{72768}\PY{p}{,}\PY{l+m+mi}{72776}\PY{p}{,}\PY{l+m+mi}{72572}\PY{p}{,}\PY{l+m+mi}{72376}\PY{p}{,}\PY{l+m+mi}{72274}\PY{p}{,}\PY{l+m+mi}{74004}\PY{p}{,}\PY{l+m+mi}{72388}\PY{p}{,}\PY{l+m+mi}{72582}\PY{p}{,}\PY{l+m+mi}{72681}\PY{p}{,}\PY{l+m+mi}{72786}\PY{p}{,}\PY{l+m+mi}{72797}\PY{p}{,}\PY{l+m+mi}{72694}\PY{p}{,}\PY{l+m+mi}{72597}\PY{p}{,}\PY{l+m+mi}{72489}\PY{p}{,}\PY{l+m+mi}{72493}\PY{p}{,}\PY{l+m+mi}{72393}\PY{p}{,}\PY{l+m+mi}{72293}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Double checking I entered all the station numbers, they need to have a matching}
+        \PY{c+c1}{\PYZsh{} station city}
+        \PY{n+nb}{len}\PY{p}{(}\PY{n}{StationNumList}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} 69
+\end{Verbatim}
+        StationInfo2[0][0],StationInfo2[1][0]
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}StationFinal = dict(zip(StationsList,StationNumList))}
+        \PY{n}{StationFinal2} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{StationsList2}\PY{p}{,}\PY{n}{StationNumList}\PY{p}{)}\PY{p}{)}
+        \PY{n}{StationFinal\PYZus{}1} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{StationNumList}\PY{p}{,}\PY{n}{StationsList}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}StationFinal2\PYZus{}1 = dict(zip(StationNumList,StationsList2))}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{StationFinal\PYZus{}1}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} \{72202: 'Miami, FL',
+         72206: 'Jacksonville, FL',
+         72208: 'Charleston, SC',
+         72210: 'Tampa Bay, FL',
+         72214: 'Tallahassee, FL',
+         72215: 'Peachtree City, GA',
+         72230: 'Shelby Cnty. Airport, AL',
+         72233: 'Slidell Muni., LA',
+         72235: 'Jackson Thomas, MS',
+         72240: 'Lake Charles, LA',
+         72248: 'Shreveport, LA',
+         72249: 'Ft. Worth, TX',
+         72250: 'Brownsville, TX',
+         72251: 'Corpus Christi, TX',
+         72261: 'Del Rio, TX',
+         72265: 'Midland, TX',
+         72274: 'Tuscon, AZ',
+         72293: 'San Diego, CA',
+         72305: 'Newport, NC',
+         72317: 'Greensboro, NC',
+         72318: 'Blacksburg, VA',
+         72327: 'Nashville, TN',
+         72340: 'Little Rock, AR',
+         72357: 'Norman, OK',
+         72363: 'Amarillo, TX',
+         72364: 'Santa Teresa, NM',
+         72365: 'Albuquerque, NM',
+         72376: 'Flagstaff, AZ',
+         72388: 'Las Vegas, NV',
+         72393: 'Vandenberg Air Force Base, CA',
+         72402: 'Wallops Island, VA',
+         72403: 'Sterling, VA',
+         72426: 'Wilmington, OH',
+         72440: 'Springfield, MO',
+         72451: 'Dodge City, KS',
+         72456: 'Topeka, KS',
+         72469: 'Denver, CO',
+         72476: 'Grand Juncion, CO',
+         72489: 'Reno, NV',
+         72493: 'Oakland, CA',
+         72501: 'Upton, NY',
+         72518: 'Albany, NY',
+         72520: 'Pittsburgh, PA',
+         72528: 'Buffalo, NY',
+         72558: 'Omaha, NE',
+         72562: 'North Platte, NE',
+         72572: 'Salt Lake City, UT',
+         72582: 'Elko, NV',
+         72597: 'Medford, OR',
+         72632: 'White Lake, MI',
+         72635: 'Gaylord, MI',
+         72645: 'Green Bay, WI',
+         72649: 'Chanhassen, MN',
+         72659: 'Aberdeen, SD',
+         72662: 'Rapid City, SD',
+         72672: 'Riverton, WY',
+         72681: 'Boise, ID',
+         72694: 'Salem, OR',
+         72747: 'International Falls, MN',
+         72764: 'Bismarck, ND',
+         72768: 'Glasgow, MT',
+         72776: 'Great Falls, MT',
+         72786: 'Spokane, WA',
+         72797: 'Quillayute, WA',
+         74004: 'Yuma Prarie Grnds, AZ',
+         74389: 'Gray, ME',
+         74455: 'Davenport, IA',
+         74494: 'Chatham, MA',
+         74560: 'Lincoln, IL'\}
+\end{Verbatim}
+        StationFinal2
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Since we have dicts for the station cities and numbers, you can}
+        \PY{c+c1}{\PYZsh{} search with either city or code}
+        \PY{k}{print} \PY{n}{StationFinal2}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Aberdeen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{k}{print} \PY{n}{StationFinal\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{72786}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+72659
+Spokane, WA
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{os}\PY{o}{.}\PY{n}{chdir}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/Users/chowdahead/Documents/stuff from old macbook/SkewT\PYZhy{}1.1.0/}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{this-is-necessary-for-me-because-i-probably-need-to-change-the-path-for-the-skewt-library}{%
+\subsubsection{This is necessary for me because I probably need to
+change the path for the SkewT
+library\ldots{}}\label{this-is-necessary-for-me-because-i-probably-need-to-change-the-path-for-the-skewt-library}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{o}{\PYZpc{}}\PY{k}{pylab}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{import} \PY{n}{imshow}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.image} \PY{k+kn}{as} \PY{n+nn}{mpimg}
+         \PY{k+kn}{import} \PY{n+nn}{time}\PY{o}{,}\PY{n+nn}{urllib}\PY{o}{,}\PY{n+nn}{urllib2}\PY{o}{,}\PY{n+nn}{cStringIO}\PY{o}{,}\PY{n+nn}{logging}\PY{o}{,}\PY{n+nn}{datetime}\PY{o}{,}\PY{n+nn}{webbrowser}\PY{o}{,}\PYZbs{}
+         \PY{n+nn}{IPython.display}\PY{o}{,}\PY{n+nn}{shutil}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         \PY{c+c1}{\PYZsh{}from mpl\PYZus{}toolkits.basemap import Basemap, cm}
+         \PY{c+c1}{\PYZsh{}from scipy.io import netcdf}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{skewt} \PY{k+kn}{import} \PY{n}{SkewT}
+         \PY{k+kn}{from} \PY{n+nn}{bs4} \PY{k+kn}{import} \PY{n}{BeautifulSoup}
+         \PY{k+kn}{from} \PY{n+nn}{IPython.core.display} \PY{k+kn}{import} \PY{n}{Image}
+         \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k+kn}{import} \PY{n}{Image} \PY{k}{as} \PY{n}{PILImage}
+         \PY{k+kn}{import} \PY{n+nn}{sys}\PY{o}{,} \PY{n+nn}{time}\PY{o}{,} \PY{n+nn}{datetime}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using matplotlib backend: MacOSX
+Populating the interactive namespace from numpy and matplotlib
+
+    \end{Verbatim}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{def} \PY{n+nf}{UWyoRadiosonde}\PY{p}{(}\PY{n}{stn}\PY{p}{,}\PY{n}{year}\PY{p}{,}\PY{n}{month}\PY{p}{,}\PY{n}{day}\PY{p}{,}\PY{n}{hour}\PY{p}{,}\PY{n}{path}\PY{p}{,}\PY{n}{plot\PYZus{}title}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}Denver = 72469}
+         
+             \PY{c+c1}{\PYZsh{}if hour == 0:}
+                 \PY{c+c1}{\PYZsh{}hour = \PYZdq{}0\PYZdq{}+str(hour) }
+             
+             \PY{k}{try}\PY{p}{:}
+         \PY{c+c1}{\PYZsh{} 1) }
+         \PY{c+c1}{\PYZsh{} Wyoming URL to download Sounding from}
+                 \PY{n}{url} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{http://weather.uwyo.edu/cgi\PYZhy{}bin/sounding?region=naconf}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PYZbs{}
+             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZam{}TYPE=TEXT}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{3ALIST\PYZam{}YEAR=}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{year}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZam{}MONTH=}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{month}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZam{}FROM=}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PYZbs{}
+             \PY{n+nb}{str}\PY{p}{(}\PY{n}{day}\PY{p}{)}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{hour}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZam{}TO=}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{day}\PY{p}{)}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{hour}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZam{}STNM=}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{stn}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}print url}
+         \PY{c+c1}{\PYZsh{}url = \PYZdq{}http://weather.uwyo.edu/cgi\PYZhy{}bin/sounding?region=naconf\PYZam{}TYPE=\PYZbs{}}
+         \PY{c+c1}{\PYZsh{}TEXT\PYZpc{}3ALIST\PYZam{}YEAR=2015\PYZam{}MONTH=06\PYZam{}FROM=1400\PYZam{}TO=1400\PYZam{}STNM=72469\PYZdq{}}
+                 \PY{n}{content} \PY{o}{=} \PY{n}{urllib2}\PY{o}{.}\PY{n}{urlopen}\PY{p}{(}\PY{n}{url}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 2)}
+         \PY{c+c1}{\PYZsh{} Remove the html tags}
+                 \PY{n}{soup} \PY{o}{=} \PY{n}{BeautifulSoup}\PY{p}{(}\PY{n}{content}\PY{p}{)}
+                 \PY{n}{data\PYZus{}text} \PY{o}{=} \PY{n}{soup}\PY{o}{.}\PY{n}{get\PYZus{}text}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 3)}
+         \PY{c+c1}{\PYZsh{} Split the content by new line.}
+                 \PY{n}{splitted} \PY{o}{=} \PY{n}{data\PYZus{}text}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data\PYZus{}text}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 4)}
+         \PY{c+c1}{\PYZsh{} Write this splitted text to a .txt document}
+                 \PY{n}{Sounding\PYZus{}filename} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{stn}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{year}\PY{p}{)}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{month}\PY{p}{)}\PY{o}{+}\PYZbs{}
+             \PY{n+nb}{str}\PY{p}{(}\PY{n}{day}\PY{p}{)}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{hour}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Z}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.txt}\PY{l+s+s1}{\PYZsq{}}
+                 \PY{n}{UWyoFilename} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{year}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{month}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{day}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PYZbs{}
+                 \PY{n+nb}{str}\PY{p}{(}\PY{n}{hour}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{stn}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}Sounding.png}\PY{l+s+s2}{\PYZdq{}}
+         
+                 \PY{n}{f} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{path}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n}{Sounding\PYZus{}filename}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{splitted}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{:}\PY{p}{]}\PY{p}{:}      \PY{c+c1}{\PYZsh{} This is the key part of the function}
+                     \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{line}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+                 
+         \PY{c+c1}{\PYZsh{} 5)}
+                 \PY{n}{S} \PY{o}{=} \PY{n}{SkewT}\PY{o}{.}\PY{n}{Sounding}\PY{p}{(}\PY{n}{path}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n}{Sounding\PYZus{}filename}\PY{p}{)}
+                 \PY{n}{S}\PY{o}{.}\PY{n}{plot\PYZus{}skewt}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{n}{plot\PYZus{}title}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Z}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}  
+                 \PY{c+c1}{\PYZsh{}fig = plt.figure()}
+                 \PY{c+c1}{\PYZsh{}plt.show()}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{savefig}\PY{p}{(}\PY{n}{path}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n}{UWyoFilename}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+             \PY{k}{except} \PY{n+ne}{ValueError}\PY{p}{:}
+                 \PY{n}{logging}\PY{o}{.}\PY{n}{exception}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{No Data from website: }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n}{Sounding\PYZus{}filename}\PY{p}{)}
+                 \PY{k}{pass}
+             
+             \PY{k}{print} \PY{n}{url}
+             \PY{k}{return} \PY{n}{UWyoFilename}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{Time} \PY{o}{=} \PY{n+nb}{raw\PYZus{}input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(C)urrent time or (a)rchive? }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{if} \PY{n}{Time} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+             \PY{n}{now} \PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{datetime}\PY{o}{.}\PY{n}{now}\PY{p}{(}\PY{p}{)} 
+             \PY{n}{Day} \PY{o}{=} \PY{n}{now}\PY{o}{.}\PY{n}{day}
+             \PY{n}{Year} \PY{o}{=} \PY{n}{now}\PY{o}{.}\PY{n}{year}
+             \PY{n}{Hour} \PY{o}{=} \PY{n}{now}\PY{o}{.}\PY{n}{hour}
+             \PY{n}{Month} \PY{o}{=} \PY{n}{now}\PY{o}{.}\PY{n}{month}
+             
+         \PY{k}{if} \PY{n}{Time} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+             \PY{n}{Year} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Year: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{Month} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Month: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{Day} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Day: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{Hour} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Would you like 0 or 12Z? }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{if} \PY{n}{Hour} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{Hour} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{Hour}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Current Local Hour: }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{Hour}\PY{p}{)}
+         \PY{k}{if} \PY{l+m+mi}{6} \PY{o}{\PYZlt{}} \PY{n}{Hour} \PY{o}{\PYZlt{}} \PY{l+m+mi}{18}\PY{p}{:}
+             \PY{n}{Hour} \PY{o}{=} \PY{l+m+mi}{12}
+         
+         \PY{k}{if} \PY{l+m+mi}{18} \PY{o}{\PYZlt{}} \PY{n}{Hour} \PY{o}{\PYZlt{}} \PY{l+m+mi}{25}\PY{p}{:}
+             \PY{n}{Hour} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{Hour} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{Hour}\PY{p}{)}
+         \PY{k}{if} \PY{l+m+mi}{0} \PY{o}{\PYZlt{}} \PY{n}{Hour} \PY{o}{\PYZlt{}} \PY{l+m+mi}{6}\PY{p}{:}
+             \PY{n}{Hour} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{Hour} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{Hour}\PY{p}{)}
+             
+         \PY{k}{if} \PY{n}{Month} \PY{o}{\PYZlt{}} \PY{l+m+mi}{10}\PY{p}{:}
+             \PY{n}{Month} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{Month}\PY{p}{)}
+         \PY{k}{if} \PY{n}{Day} \PY{o}{\PYZlt{}} \PY{l+m+mi}{10}\PY{p}{:}
+             \PY{n}{Day} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{0}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{Day}\PY{p}{)}
+         
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fixed Local Hour: }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{Hour}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}mypath = raw\PYZus{}input(\PYZdq{}Where would you like the file? \PYZbs{}}
+         \PY{c+c1}{\PYZsh{}(For now you need to provide the full path file)\PYZdq{}) }
+         
+         \PY{k}{print} \PY{n}{datetime}\PY{o}{.}\PY{n}{date}\PY{o}{.}\PY{n}{today}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{strftime}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+         \PY{n}{month} \PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{date}\PY{o}{.}\PY{n}{today}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{strftime}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+         
+         \PY{n}{location} \PY{o}{=} \PY{n+nb}{raw\PYZus{}input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(D)aily map or (O)ther location: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{if} \PY{n}{location} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+             \PY{n}{mypath} \PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/Users/ChowdaHead/Desktop/Weather\PYZus{}Blog/}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n}{month}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{Day}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZdq{}}
+         \PY{k}{if} \PY{n}{location} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{O}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+             \PY{n}{mypath} \PY{o}{=} \PY{n+nb}{raw\PYZus{}input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Where would you like the file? }\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{    (For now you need to provide the full path file)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+         \PY{c+c1}{\PYZsh{}path = \PYZdq{}/Users/ChowdaHead/Desktop/Weather\PYZus{}Blog/UWyo\PYZus{}Soundings/\PYZdq{}}
+         \PY{c+c1}{\PYZsh{}mypath = path+str(Year)+\PYZdq{}\PYZus{}\PYZdq{}+str(Month)+\PYZdq{}\PYZus{}\PYZdq{}+str(int(Day))+\PYZdq{}\PYZus{}\PYZdq{}+str(Hour)+\PYZdq{}Z\PYZdq{}}
+         
+         \PY{k}{if} \PY{o+ow}{not} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{isdir}\PY{p}{(}\PY{n}{mypath}\PY{p}{)}\PY{p}{:}
+             \PY{n}{os}\PY{o}{.}\PY{n}{makedirs}\PY{p}{(}\PY{n}{mypath}\PY{p}{)}
+         \PY{n}{os}\PY{o}{.}\PY{n}{chdir}\PY{p}{(}\PY{n}{mypath}\PY{p}{)}    
+             
+         \PY{n}{multiplemaps} \PY{o}{=} \PY{n+nb}{raw\PYZus{}input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Multiple Maps? (y) or (n): }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{if} \PY{n}{multiplemaps} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+             
+             \PY{n}{Input} \PY{o}{=} \PY{n+nb}{raw\PYZus{}input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The default will run Denver and Grand Junction soundings. }\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{Run these (y) or choose other station (n)? }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} UWyoRadiosonde(station\PYZsh{},year,month(numerical),day(numerical),time(00 or 12 Z),file path location, plot title)}
+         
+             \PY{k}{if} \PY{n}{Input} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+         \PY{c+c1}{\PYZsh{} Denver}
+                 \PY{n}{UWyoRadiosonde}\PY{p}{(}\PY{l+m+mi}{72476}\PY{p}{,}\PY{n}{Year}\PY{p}{,}\PY{n}{Month}\PY{p}{,}\PY{n}{Day}\PY{p}{,}\PY{n}{Hour}\PY{p}{,}\PY{n}{mypath}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Grand Junction Sounding: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Grand Junction}
+                 \PY{n}{UWyoRadiosonde}\PY{p}{(}\PY{l+m+mi}{72469}\PY{p}{,}\PY{n}{Year}\PY{p}{,}\PY{n}{Month}\PY{p}{,}\PY{n}{Day}\PY{p}{,}\PY{n}{Hour}\PY{p}{,}\PY{n}{mypath}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Denver Sounding: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+             \PY{k}{if} \PY{n}{Input} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{n}{mapzz} \PY{o}{=} \PY{n+nb}{raw\PYZus{}input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Enter number of different station maps: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{k}{print} \PY{n}{mapzz}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{mapzz}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{mapp} \PY{o}{=} \PY{n+nb}{raw\PYZus{}input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Which map: (please provide a 5\PYZhy{}digit station code) }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                     \PY{k}{if} \PY{n}{mapp} \PY{o+ow}{in} \PY{n}{StationNumList}\PY{p}{:}
+         
+                         \PY{n}{j} \PY{o}{=} \PY{n}{StationNumList}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{mapp}\PY{p}{)}
+                         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Index Number: }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{j}\PY{p}{)}
+                         \PY{n}{UWyoRadiosonde}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{mapp}\PY{p}{)}\PY{p}{,}\PY{n}{Year}\PY{p}{,}\PY{n}{Month}\PY{p}{,}\PY{n}{Day}\PY{p}{,}\PY{n}{Hour}\PY{p}{,}\PY{n}{mypath}\PY{p}{,}\PY{n+nb}{str}\PY{p}{(}\PY{n}{mapp}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Sounding: }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{StationsList}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{}time.sleep(45)}
+         
+         \PY{k}{if} \PY{n}{multiplemaps} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+             
+             \PY{n}{StnInput} \PY{o}{=} \PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Choose 5 digit station number: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{if} \PY{n}{StnInput} \PY{o+ow}{in} \PY{n}{StationNumList}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} If Input is in our list, then set j equal to that numbered index}
+             \PY{c+c1}{\PYZsh{} j will be an int!!}
+                 \PY{n}{j} \PY{o}{=} \PY{n}{StationNumList}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{StnInput}\PY{p}{)}
+                 \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Index Number: }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{j}\PY{p}{)}
+                     
+                 \PY{c+c1}{\PYZsh{}UWyoRadiosonde(station number, year, month, day, hour, file path, plot title)}
+                 
+             \PY{n}{UWyoRadiosonde}\PY{p}{(}\PY{n}{StnInput}\PY{p}{,}\PY{n}{Year}\PY{p}{,}\PY{n}{Month}\PY{p}{,}\PY{n}{Day}\PY{p}{,}\PY{n}{Hour}\PY{p}{,}\PY{n}{mypath}\PY{p}{,}\PY{n+nb}{str}\PY{p}{(}\PY{n}{StnInput}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Sounding: }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{StationsList}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(C)urrent time or (a)rchive? C
+Current Local Hour: 9
+Fixed Local Hour: 12
+Nov
+(D)aily map or (O)ther location: D
+Multiple Maps? (y) or (n): y
+The default will run Denver and Grand Junction soundings. Run these (y) or choose other station (n)? y
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/chowdahead/anaconda/lib/python2.7/site-packages/bs4/\_\_init\_\_.py:181: UserWarning: No parser was explicitly specified, so I'm using the best available HTML parser for this system ("lxml"). This usually isn't a problem, but if you run this code on another system, or in a different virtual environment, it may use a different parser and behave differently.
+
+The code that caused this warning is on line 174 of the file /Users/chowdahead/anaconda/lib/python2.7/runpy.py. To get rid of this warning, change code that looks like this:
+
+ BeautifulSoup(YOUR\_MARKUP\})
+
+to this:
+
+ BeautifulSoup(YOUR\_MARKUP, "lxml")
+
+  markup\_type=markup\_type))
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+---- Lifted Parcel Quantities ----
+Parcel: SB
+Ps  : 853.0hPa
+TCs :   4.6C
+TDs :   0.0C
+-------------
+Plcl: 794.6hPa
+Tlcl:  -1.0C
+Plfc:   nanhPa
+P\_el:   nanhPa
+CAPE:   0.0J
+CIN:    0.0J
+http://weather.uwyo.edu/cgi-bin/sounding?region=naconf\&TYPE=TEXT\%3ALIST\&YEAR=2017\&MONTH=11\&FROM=2412\&TO=2412\&STNM=72476
+
+---- Lifted Parcel Quantities ----
+Parcel: SB
+Ps  : 832.0hPa
+TCs :  15.4C
+TDs :  -8.6C
+-------------
+Plcl: 600.0hPa
+Tlcl:  -10.3C
+Plfc:   nanhPa
+P\_el:   nanhPa
+CAPE:   0.0J
+CIN:    0.0J
+http://weather.uwyo.edu/cgi-bin/sounding?region=naconf\&TYPE=TEXT\%3ALIST\&YEAR=2017\&MONTH=11\&FROM=2412\&TO=2412\&STNM=72469
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
