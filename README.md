@@ -2,13 +2,13 @@
 ### With all the new updates and a new laptop I needed to do a couple of steps to be able to convert my jupyter .ipynb notebooks to either pdf or tex files (they work on the same process). 
 
 ### First off I needed to install homebrew installer: (command line)
-### $/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+##### $/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 ### Next we need Pandocs: 
-### $brew install pandoc
+##### $brew install pandoc
 
 ### Then MacTex to convert to LaTex:
-### I went to http://tug.org/mactex/
+##### I went to http://tug.org/mactex/
 
 #### So the latest problem I have noticed with my weather notebooks was that when I tried to convert the .ipynb notebooks to either LaTex or pdf one of my noetbooks was just not working when others were converting nicely.
 
