@@ -17,3 +17,5 @@
 #### The notebook converted the beginning but only saved a pdf upto a certain point. I was totally lost because I had an almost identical noetnbook that converted no problem. So I saved the notebook to a .tex file and opened it in the TexShop app. Running the code (typset button), it would not bring up a wkrking copy of the pdf. It did indicate an error for me and a place to locate it. Another shitty problem was the error line in question was identical to a line elsewhere in the code so I wasn't even looking at the correct code. Long story short I was able to sift through the LaTex code and actually locate the code block that was causing the problems.
 
 #### The final resolution was that in my specific notebook I had some Raw NBConvert cells. Now that I write this the error totally makes sense. Regardless of hindsight, I have narrowed down my specific problem!!
+
+### There was a nice example I found to help wrap the text of the notebook so the code doesn't get cut off when converted to pdf. http://www.markus-beuckelmann.de/blog/customizing-nbconvert-pdf.html
